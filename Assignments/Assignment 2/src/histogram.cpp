@@ -1,18 +1,3 @@
-// // Write (and upload) a program using Pthreads or C++11 threads that implements the histogram program discussed in "4 - ParallelSoftware". 
-// The program will have too:
-// populate an array (data) of <data_count> float elements between <min_meas> and <max_meas>. Use srand(100) to initialize your pseudorandom sequence.
-// compute the histogram (i.e., bin_maxes and bin_count) using  <number of threads> threads using a global sum
-// compute the histogram (i.e., bin_maxes and bin_count) using  <number of threads> threads using a tree structured sum
-// The inputs of the program are:
-
-// <number of threads>, the number of threads to use for the execution
-// <bin_count>, the number of bins in the histogram
-// <min_meas>, minimum (float) value of the measurements
-// <max_meas>, maximum (float) value of the measurements
-// <data_count>, number of measurements
-// Your program must adhere to the following order of command-line arguments:
-// <number of threads> <bin count> <min meas> <max meas> <data count>
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 // Important: note that for the same input and varying number of threads the output must be the same. 
@@ -48,10 +33,10 @@
 
 
 
-// Used to create on the fly debug print statements
-void debug_print(std::string msg){
-    std::cout << msg << std::endl;
-}
+// // Used to create on the fly debug print statements
+// void debug_print(std::string msg){
+//     std::cout << msg << std::endl;
+// }
 
 // Print command usage information to the console
 void printUsage(const char* program_name) {
