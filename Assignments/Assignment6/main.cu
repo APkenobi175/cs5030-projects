@@ -86,7 +86,17 @@ int main(int argc, char **argv){
     // 5. Run GPU Naive implementation
 
     printf("----GPU NAIVE IMPLEMENTATION----\n");
-    printf("Not implemented yet\n");
+    
+    float gpu_naive_ms;
+    Implementation_GPU_Naive(h_init, h_out, n, ITERATIONS, &gpu_naive_ms);
+    // 5.1 Print GPU Naive Report
+
+    printf("-----GPU NAIVE REPORT-----\n");
+    printf("GPU Naive Time: %.6f ms\n", gpu_naive_ms);
+    printf("Iterations: %d\n", ITERATIONS);
+    printf("Grid Size: %dx%d\n", n, n);
+
+    
     
 
 
