@@ -67,7 +67,7 @@ int main(int argc, char **argv){
     double cpu_ms = (end.tv_sec - start.tv_sec) * 1000.0 + (end.tv_nsec - start.tv_nsec) / 1e6;
 
     // 4.2 Print CPU Report
-    printf("CPU Time: %.2f ms\n", cpu_ms);
+    printf("CPU Time: %.5f ms\n", cpu_ms);
     printf("Iterations: %d\n", ITERATIONS);
     printf("Grid Size: %dx%d\n", n, n);
     
@@ -90,7 +90,7 @@ int main(int argc, char **argv){
     Implementation_GPU_Naive(h_init, h_out, n, ITERATIONS, &gpu_naive_ms);
     // 5.1 Print GPU Naive Report
 
-    printf("GPU Naive Time: %.2f ms\n", gpu_naive_ms);
+    printf("GPU Naive Time: %.5f ms\n", gpu_naive_ms);
     printf("Iterations: %d\n", ITERATIONS);
     printf("Grid Size: %dx%d\n", n, n);
     float timesFasterThanCPU = cpu_ms / gpu_naive_ms;
@@ -113,7 +113,7 @@ int main(int argc, char **argv){
     float gpu_tiled_ms;
     Implementation_GPU_Tiled(h_init, h_out, n, ITERATIONS, &gpu_tiled_ms);
     // 6.1 Print GPU Tiled Report
-    printf("GPU Tiled Time: %.2f ms\n", gpu_tiled_ms);
+    printf("GPU Tiled Time: %.5f ms\n", gpu_tiled_ms);
     printf("Iterations: %d\n", ITERATIONS);
     printf("Grid Size: %dx%d\n", n, n);
     timesFasterThanCPU = cpu_ms / gpu_tiled_ms;
