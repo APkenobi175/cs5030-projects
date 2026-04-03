@@ -128,12 +128,41 @@ int main(int argc, char **argv){
     fwrite(h_out, sizeof(int), size, f_gpu_tiled);
     fclose(f_gpu_tiled);
     printf("Output file saved to gpu_tiled_output.raw\n");
-    
+
+    printf("----VALIDATION SECTION----\n");
+
+    int *h_naive = (int*)malloc(size * sizeof(int));
+    float dummy;
+    Implementation_GPU_Naive(h_init, h_naive, n, 1, &dummy);
+
+    int naive_mismatches = 0;
+    int tiled_mismatches = 0;
+
+    for (size_t i = 0; i < size; i++){
+        if (h_naive[i] != cpu_result[i]) naive_mismatches++;
+        if (h_out[i] != cpu_result[i]) tiled_mismatches++;
+    }
+    printf("Naive GPU mismatches with CPU: %d\n", naive_mismatches);
+    if (naive_mismatches == 0) printf("PASS\n");
+    else printf("FAILED\n");
+    printf("Tiled GPU mismatches with CPU: %d\n", tiled_mismatches);
+    if (tiled_mismatches == 0) printf("PASS\n");
+    else printf("FAILED\n");
+
+    printf("----BANDWIDTH CALCULATION----\n");
+
+    double bytes_per_iteration = 2.0 * n * n * sizeof(int); // Read + Write
+    double naive_bandwidth = (bytes_per_iteration * ITERATIONS) / (gpu_naive_ms / 1000.0) / (1e9); // GB/s
+    double tiled_bandwidth = (bytes_per_iteration * ITERATIONS) / (gpu_tiled_ms / 1000.0) / (1e9); // GB/s
+
+    printf("GPU Naive Effective Bandwidth: %.2f GB/s\n", naive_bandwidth);
+    printf("GPU Tiled Effective Bandwidth: %.2f GB/s\n", tiled_bandwidth);
 
     // free resources
     free(h_init);
     free(h_out);
     free(cpu_result);
+    free(h_naive);
 
 
     // You are done
