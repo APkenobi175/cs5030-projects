@@ -63,6 +63,7 @@ void Implementation_GPU_Naive(const int *h_init, int *h_out, int n, int iteratio
         d_input = d_output;
         d_output = temp;
     }
+    cudaDeviceSynchronize();
     // 6. Stop recording, calculate elapsed time, copy result back to host
     CUDA_CHECK(cudaEventRecord(stop));
     CUDA_CHECK(cudaEventSynchronize(stop));

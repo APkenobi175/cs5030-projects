@@ -167,9 +167,13 @@ int main(int argc, char **argv){
 
     // You are done
 
-    printf("COMPLETE\nAll implementations ran successfully.\n");
-    printf("now run `python3 visualize.py` to visualize the results!\n");
+    if (naive_mismatches == 0 && tiled_mismatches == 0){
+        printf("COMPLETE\nAll implementations ran successfully.\n");
+        printf("now run `python3 visualize.py` to visualize the results!\n");
 
+    } else {
+        printf("Validation FAILED. Mismatches found.\n");
+    }
 
 
     return 0;
