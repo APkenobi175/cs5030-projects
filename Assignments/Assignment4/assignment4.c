@@ -20,7 +20,15 @@ int main(int argc, char *argv[]){
     int data_count;
 
     // 4. Rank 0 Should take argv (all the arguments) and broadcast them to all other processes
-    // First, convert them to appropriate data types
+    // First, convert them to appropriate data types (if the args are correct)
+
+    if (argc != 5) {
+        if (rank == 0) {
+            fprintf(stderr, "Usage: %s <bin_count> <min_meas> <max_meas> <data_count>\n", argv[0]);
+        }
+        MPI_Finalize();
+        return 1;
+    }
     if (rank == 0) {
         bin_count = atoi(argv[1]);
         min_meas = atof(argv[2]);
