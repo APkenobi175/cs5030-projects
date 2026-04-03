@@ -14,9 +14,13 @@
 
 
 
-
+#ifndef N
 #define N 1024
+#endif
+
+#ifndef ITERATIONS
 #define ITERATIONS 1000
+#endif
 
 int main(int argc, char **argv){
     // 1. Get the input file from cmd or use default
