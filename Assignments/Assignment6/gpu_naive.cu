@@ -2,41 +2,37 @@
 #include <cuda_runtime.h>
 
 
-// 1. Cuda Check
-define CUDA_CHECK(call)
-do{
-    cudaError_t err = (call);
-    if (err != cudaSuccess){
-        fprintf(stderr, "CUDA error in %s at line %d: %s\n", __FILE__, __LINE__, cudaGetErrorString(err));
-        exit(EXIT_FAILURE); 
 
-}
-} while(0)
+// 1. Cuda error checking
+#define CUDA_CHECK(call)                                                    \
+  do {                                                                      \
+    cudaError_t err = (call);                                               \
+    if (err != cudaSuccess) {                                               \
+      fprintf(stderr, "CUDA error in %s at line %d: %s\n",                 \
+              __FILE__, __LINE__, cudaGetErrorString(err));                  \
+      exit(EXIT_FAILURE);                                                    \
+    }                                                                       \
+  } while(0)
+
 
 
 
 __global__ void GameOfLife_GPU_Naive(const int *input, int *output, int n){
-    // Get the row and column index for this thread
     int c = blockIdx.x * blockDim.x + threadIdx.x;
     int r = blockIdx.y * blockDim.y + threadIdx.y;
-
-    if (r >= n || c >= n) return; // Out of bounds check
+    if (r >= n || c >= n) return;
 
     int live = 0;
-
     for (int dr = -1; dr <= 1; dr++){
-        for (int dc = -1; dc <1; dc++){
-            if (dr == 0 && dc == 0) continue; // Skip the cell itself
-
-            int nr = ( r + dr + n) % n;
-            int nc = ( c + dc + n) % n;
+        for (int dc = -1; dc <= 1; dc++){       
+            if (dr == 0 && dc == 0) continue;
+            int nr = (r + dr + n) % n;
+            int nc = (c + dc + n) % n;
             live += input[nr * n + nc];
         }
-
+    }
     int cell = input[r * n + c];
     output[r * n + c] = (cell == 1 && (live == 2 || live == 3)) || (cell == 0 && live == 3) ? 1 : 0;
-    }
-
 }
 
 
