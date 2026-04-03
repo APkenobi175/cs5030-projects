@@ -106,6 +106,8 @@ int main(int argc, char **argv){
     fwrite(h_out, sizeof(int), size, f_gpu);
     fclose(f_gpu);
 
+    printf("Output file saved to gpu_naive_output.raw\n");
+
 
     
 
