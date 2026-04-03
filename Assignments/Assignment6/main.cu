@@ -93,7 +93,7 @@ int main(int argc, char **argv){
     printf("GPU Naive Time: %.6f ms\n", gpu_naive_ms);
     printf("Iterations: %d\n", ITERATIONS);
     printf("Grid Size: %dx%d\n", n, n);
-    timesFasterThanCPU = cpu_ms / gpu_naive_ms;
+    float timesFasterThanCPU = cpu_ms / gpu_naive_ms;
     printf("GPU Naive is %.2f times faster than CPU\n", timesFasterThanCPU);
 
 
