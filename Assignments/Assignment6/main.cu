@@ -7,8 +7,8 @@
 // Import 3 types of implementations: CPU, GPU naive, and GPU tiled and utils
 
 #include "cpu.cpp"
-// #include "gpu_naive.cu"
-#include "gpu_tiled.cu"
+#include "gpu_naive.cu"
+// #include "gpu_tiled.cu"
 
 // #include "utils.cpp"
 
