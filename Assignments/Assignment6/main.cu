@@ -67,7 +67,7 @@ int main(int argc, char **argv){
     double cpu_ms = (end.tv_sec - start.tv_sec) * 1000.0 + (end.tv_nsec - start.tv_nsec) / 1e6;
 
     // 4.2 Print CPU Report
-    printf("CPU Time: %.6f ms\n", cpu_ms);
+    printf("CPU Time: %.2f ms\n", cpu_ms);
     printf("Iterations: %d\n", ITERATIONS);
     printf("Grid Size: %dx%d\n", n, n);
     
@@ -90,7 +90,7 @@ int main(int argc, char **argv){
     Implementation_GPU_Naive(h_init, h_out, n, ITERATIONS, &gpu_naive_ms);
     // 5.1 Print GPU Naive Report
 
-    printf("GPU Naive Time: %.6f ms\n", gpu_naive_ms);
+    printf("GPU Naive Time: %.2f ms\n", gpu_naive_ms);
     printf("Iterations: %d\n", ITERATIONS);
     printf("Grid Size: %dx%d\n", n, n);
     float timesFasterThanCPU = cpu_ms / gpu_naive_ms;
@@ -108,8 +108,36 @@ int main(int argc, char **argv){
 
     printf("Output file saved to gpu_naive_output.raw\n");
 
+    printf("----GPU TILED IMPLEMENTATION----\n");
+    // 6. Run GPU Tiled implementation
+    float gpu_tiled_ms;
+    Implementation_GPU_Tiled(h_init, h_out, n, ITERATIONS, &gpu_tiled_ms);
+    // 6.1 Print GPU Tiled Report
+    printf("GPU Tiled Time: %.2f ms\n", gpu_tiled_ms);
+    printf("Iterations: %d\n", ITERATIONS);
+    printf("Grid Size: %dx%d\n", n, n);
+    timesFasterThanCPU = cpu_ms / gpu_tiled_ms;
+    printf("GPU Tiled is %.2f times faster than CPU\n", timesFasterThanCPU);
 
+    // 6.2 Save GPU Tiled output to file
+    FILE *f_gpu_tiled = fopen("gpu_tiled_output.raw", "wb");
+    if (!f_gpu_tiled) {
+        fprintf(stderr, "Error opening file gpu_tiled_output.raw\n");
+        return 1;
+    }
+    fwrite(h_out, sizeof(int), size, f_gpu_tiled);
+    fclose(f_gpu_tiled);
     
+
+    // free resources
+    free(h_init);
+    free(h_out);
+    free(cpu_result);
+
+
+    // You are done
+
+    printf("COMPLETE\nAll implementations ran successfully.\n");
 
 
 
