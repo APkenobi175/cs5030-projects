@@ -7,10 +7,10 @@
 // Import 3 types of implementations: CPU, GPU naive, and GPU tiled and utils
 
 #include "cpu.cpp"
-#include "gpu_naive.cu"
+// #include "gpu_naive.cu"
 #include "gpu_tiled.cu"
 
-#include "utils.cpp"
+// #include "utils.cpp"
 
 
 
@@ -96,7 +96,7 @@ int main(int argc, char **argv){
     printf("Iterations: %d\n", ITERATIONS);
     printf("Grid Size: %dx%d\n", n, n);
 
-    
+
     
 
 
