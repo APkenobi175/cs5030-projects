@@ -127,6 +127,7 @@ int main(int argc, char **argv){
     }
     fwrite(h_out, sizeof(int), size, f_gpu_tiled);
     fclose(f_gpu_tiled);
+    printf("Output file saved to gpu_tiled_output.raw\n");
     
 
     // free resources
@@ -138,6 +139,7 @@ int main(int argc, char **argv){
     // You are done
 
     printf("COMPLETE\nAll implementations ran successfully.\n");
+    printf("now run `python3 visualize.py` to visualize the results!\n");
 
 
 
