@@ -133,7 +133,7 @@ int main(int argc, char **argv){
 
     int *h_naive = (int*)malloc(size * sizeof(int));
     float dummy;
-    Implementation_GPU_Naive(h_init, h_naive, n, 1, &dummy);
+    Implementation_GPU_Naive(h_init, h_naive, n, ITERATIONS, &dummy);
 
     int naive_mismatches = 0;
     int tiled_mismatches = 0;

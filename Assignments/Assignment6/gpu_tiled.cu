@@ -96,7 +96,6 @@ void Implementation_GPU_Tiled(const int *h_init, int *h_out, int n, int iteratio
         d_input = d_output;
         d_output = temp;
     }
-    cudaDeviceSynchronize();
     // 5. Stop recording, calculate elapsed time, copy result back to host
     CUDA_CHECK(cudaEventRecord(stop));
     CUDA_CHECK(cudaEventSynchronize(stop));
